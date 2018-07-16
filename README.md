@@ -1,5 +1,5 @@
 # Numero_Anti_Harcelement
-Les scripts complets adaptés pour la Raspberry PI pour le numéro Anti Harcelement pour tous que le gouvernement français a fait annulé par la pression de Elliot Lepers, Clara Gonzales et Caroline de Haas.
+Les scripts complets adaptés pour la Raspberry PI pour le numéro Anti Harcelement pour tous que le gouvernement français a ignoré et qu'on a du annulé suite aux pressions de Elliot Lepers, Clara Gonzales, Caroline de Haas, Natalia Kovacheski et leGroupeF.
 
 # Programme Numero Anti Harcelement pour tous !
 Logiciel et script permettant de faire de la prévention contre le harcelement pour tous et toutes.
