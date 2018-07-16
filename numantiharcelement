@@ -1,0 +1,69 @@
+#!/bin/bash
+
+#!/bin/sh
+
+# Programme Numero Anti Harcelement pour tous !
+# Logiciel et script permettant de faire de la prévention contre
+# le harcelement pour tous et toutes.
+# Gestion automatique des SMS via des méthodes libres et open-sources
+
+# Par Pierre-Aimé IMBERT (pai.logicielslibres@gmail.com)
+
+# Ce(tte) œuvre est mise à disposition selon les termes de la
+# Licence Creative Commons Attribution :
+# - Pas d’Utilisation Commerciale
+# - Pas de modification ou refonte autorisée
+# - Nommer l'auteur (Pierre-Aimé IMBERT) dans le projet
+# https://creativecommons.org/licenses/by-nc-nd/4.0/
+
+case "$1" in
+	start)
+		echo "Lancement de la plateforme telephonique"
+		screen -dmS sessiontel /usr/bin/antiv2.sh
+		;;
+	stop)
+		echo "Arret de la plateforme telephonique"
+		killall /usr/bin/antiv2.sh
+		killall screen
+		sleep 2
+	  	echo "Demontage de ma cle LOG"
+		umount /media/SMS
+		sleep 2
+		;;
+	restart|reload)
+		echo "Redemarrage de la plateforme telephonique"
+		$0 stop
+		$0 start
+		;;
+	check)
+		clear
+
+		echo "   "
+		echo "Verification de Gammu :"
+		ps -eaf | grep gammu
+
+		echo "   "
+		echo "Verification de la RAM :"
+		tail -n 14 /media/SMS/ram.log
+
+		echo "   "
+	        export NOMBREAIDES=`grep -c "NHGAMMUFOIS" /media/SMS/AIDES/*`
+		echo "Il y a eu ${NOMBREAIDES} signalements"
+
+		echo "   "
+	        export NOMBRESMS=`grep -c "SMS RECU" /media/SMS/sms.log`
+	        export NOMBRESPAM=`grep -c "Classement dans les SPAMS" /media/SMS/sms.log`
+		echo "Il y a eu ${NOMBRESMS} SMS dont ${NOMBRESPAM} SPAM"
+
+	 	echo "   "
+	 	echo "LOG des 20 derniers SMS :"
+	 	echo "   "
+	 	tail -n 40 /media/SMS/sms.log
+		echo "   "
+		;;
+	*)
+		echo "Usage: $0 start|stop|restart|reload|status"
+		exit 1
+		;;
+esac
+exit 0
